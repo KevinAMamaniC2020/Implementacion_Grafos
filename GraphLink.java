@@ -3,6 +3,7 @@ package Grafos;
 public class GraphLink <E>{
 	
 	protected ListLinked<Vertex<E>> listVertex;
+	
 	public GraphLink() {
 		listVertex = new ListLinked<Vertex<E>>();
 	}
@@ -36,12 +37,12 @@ public class GraphLink <E>{
 	}
 	
 	
-	//Ponderado
+	//Ponderado 
 	public void insertEdgePond(E verOri, E verDes) {
 		insertEdgePond(verOri,verDes,-1);
 	}
 	
-	//Ponderado
+	//Ponderado 
 	public void insertEdgePond(E verOri, E verDes, int weight) {
 		Vertex<E> refOri = this.listVertex.search(new Vertex<E>(verOri));
 		Vertex<E> refDes = this.listVertex.search(new Vertex<E>(verDes));
@@ -56,8 +57,8 @@ public class GraphLink <E>{
 			return;	
 		}
 		
-		refOri.listAdj.insertFirst(new Edge<E>(refDes, weight));//dirigido
-		refDes.listAdj.insertFirst(new Edge<E>(refOri, weight));//no dirigido
+		refOri.listAdj.insertFirst(new Edge<E>(refDes,weight));//dirigido
+		refDes.listAdj.insertFirst(new Edge<E>(refOri,weight));//no dirigido
 	}
 	
 	public String toString() {
@@ -88,8 +89,8 @@ public class GraphLink <E>{
 	
 	private void DFSRec (Vertex<E> v) {
 		v.label=1; // 1 visitado, 0 dicovery , 2 Back
-		//System.out.println(v+" "); //saca lista de adyacencia
-		System.out.println(v.data+" "); //solo el dato
+		System.out.println(v+" "); //saca lista de adyacencia
+		//System.out.println(v.data+" "); //solo el dato
 		Node<Edge<E>> e = v.listAdj.first;
 		
 		for(; e!=null;e=e.getNext()) {
@@ -117,66 +118,31 @@ public class GraphLink <E>{
 		BFSRec(v);
 	}
 	
-	private void BFSRec (Vertex<E> v) {
-		
-		this.listVertex.insertLast(v);
-		v.label=1;
-		int i = 0;
-		//System.out.println(v+" "); //saca lista de adyacencia
-		System.out.println(v.data+" ");//solo el dato
-		while(!this.listVertex.isEmpty()) {
-			E element= v.data;
-			Node<Edge<E>> e = v.listAdj.first;
-			for(; element!=null;i++) {
+	private void BFSRec (Vertex<E> s) {
+		ListLinked<Vertex<E>> nuevo = new ListLinked<Vertex<E>>();
+		s.label=1;
+		nuevo.insertLast(s);
+		Node<Vertex<E>> i=nuevo.last;
+		//System.out.println(s.data+" ");//solo el dato
+		System.out.println(s+" ");//saca lista de adyacencia
+		while(!nuevo.isEmpty()) {
+			ListLinked<Vertex<E>> nu = new ListLinked<Vertex<E>>();
+			Node<Edge<E>> e = s.listAdj.first;
+			for(; i!=null; i=i.getNext() ) {
 				for(; e!=null;e=e.getNext()) {
 					if(e.data.label == 0) {
 						Vertex<E> w = e.data.refDest;
 						if(w.label == 0) {
 							e.data.label = 1;
 							w.label = 1;
-							listVertex.insertLast(w);
+							nu.insertLast(w);
 						}
 						else 
 							e.data.label=3;
 					}
 				}
 			}
-			i=i+1;
+			//i=i.getNext();
 		}
 	}
-	
-	/*private void movDijkstra(Vertex<E> v) {
-		for() {
-			if ()
-			else 
-		}
-		
-		while() {
-			
-			for() {
-				
-			}
-		}
-		
-	}*/
-	
-	//sabes si un grafo esta incluido en otro
-	//return false si no hay inclusion y tru si es q hay
-	public boolean dobleGrafo(GraphLink g1, GraphLink g2) {
-		
-		if() {
-			return true;
-		}
-		else
-			return false;
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 }

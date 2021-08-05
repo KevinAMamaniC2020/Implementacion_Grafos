@@ -3,6 +3,7 @@ package Grafos;
 public class ListLinked<T> {
 	
 	protected Node<T> first, last;
+	protected int size;
 	
 	public ListLinked() {
 		this.first=null;
@@ -17,20 +18,12 @@ public class ListLinked<T> {
 		this.first=first;
 	}
 	
+	int size() {
+		return size;
+	}
 	boolean isEmpty() {
 		return this.first==null;
 	}
-	
-	/*public int search(T data) {
-		Node<T> nodo =this.first;
-		int pos=0;
-		while(nodo != null && !nodo.data.equals(data)) {
-			nodo = nodo.getNext();
-			pos++;
-		}
-		if(nodo==null) return -1;
-			return pos;
-	}*/
 	
 	public T search(T data) {
 		Node<T> nodo =this.first;

@@ -5,8 +5,7 @@ public class Vertex<E> {
 	protected E data;
 	protected ListLinked<Edge<E>> listAdj;
 	protected int label;// 0= unexplored 1=visited
-	/*protected int dist;
-	protected Vertex<E>path;*/
+
 	
 	public Vertex(E data) {
 		this.data=data;
@@ -26,7 +25,7 @@ public class Vertex<E> {
 	}
 	
 	public String toString() {
-		return this.data+"----->"+ this.listAdj.toString() +"\n";
+		return this.data+"----->"+ this.listAdj.toString() +"\n" ;
 	}
 	
 	
